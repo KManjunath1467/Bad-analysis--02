@@ -1,53 +1,85 @@
-# Extremely bad Python code 😈
+import os
 
-a=10
-b=20
-c=30
-d=40
-e=50
 
-print("Starting program")
+def are_numbers_increasing(numbers):
+    """
+    Check whether numbers are in increasing order.
+    """
+    return all(numbers[i] < numbers[i + 1] for i in range(len(numbers) - 1))
 
-if a<b:
-    if b<c:
-        if c<d:
-            if d<e:
-                print("Numbers are increasing")
-            else:
-                print("error")
-        else:
-            print("error")
+
+def print_pair_sums(values):
+    """
+    Print sum of all possible pairs.
+    """
+    for first in values:
+        for second in values:
+            print(f"{first} + {second} = {first + second}")
+
+
+def calculate_expression(a, b, c, d, e, f, g, h, i, j):
+    """
+    Perform a mathematical calculation.
+    """
+    try:
+        result = a + b - (c * d / e) + f - g + (h * i) - j
+        return result
+    except ZeroDivisionError:
+        print("Division by zero is not allowed.")
+        return None
+
+
+def divide_number():
+    """
+    Divide 100 by user input safely.
+    """
+    try:
+        num = int(input("Enter a number: "))
+
+        if num == 0:
+            print("Cannot divide by zero.")
+            return
+
+        print("Result:", 100 / num)
+
+    except ValueError:
+        print("Please enter a valid integer.")
+
+
+def main():
+    numbers = [10, 20, 30, 40, 50]
+
+    print("Starting program...\n")
+
+    if are_numbers_increasing(numbers):
+        print("Numbers are increasing.\n")
     else:
-        print("error")
-else:
-    print("error")
+        print("Numbers are not increasing.\n")
 
-x = 0
+    counter = 0
 
-while x < 5:
-    print("Value:", x)
-    x = x + 1
-    if x == 3:
-        x = x - 1   # Infinite loop bug 😂
+    while counter < 5:
+        print("Counter value:", counter)
+        counter += 1
 
-list = [1,2,3,4,5]
+    values = [1, 2, 3, 4, 5]
 
-for i in range(len(list)):
-    for j in range(len(list)):
-        print(list[i] + list[j])
+    print("\nPair sums:")
+    print_pair_sums(values)
 
-def calc(a,b,c,d,e,f,g,h,i,j):
-    return a+b-c*d/e+f-g+h*i-j
+    result = calculate_expression(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
-print(calc(1,2,3,4,5,6,7,8,9,10))
+    if result is not None:
+        print("\nCalculation Result:", result)
 
-password = "admin123"
-print("Password is:", password)   # Security issue 😬
+    # Using environment variable instead of hardcoded password
+    password = os.getenv("APP_PASSWORD", "default_password")
+    print("\nPassword loaded securely.")
 
-try:
-    num = int(input("Enter number: "))
-    print(100 / num)
-except:
-    pass   # Hides every error badly
+    divide_number()
 
-print("Program ended")
+    print("\nProgram ended successfully.")
+
+
+if __name__ == "__main__":
+    main()
